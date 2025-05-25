@@ -6,12 +6,12 @@ class Game:
         self.scores = [0, 0]  # Record win counts
         self.round_winner = None
         self.current_player = 0
-        self.boxes = {player: [] for player in self.players}  # Create a box array for each player
+        self.boxes = {player: [] for player in self.players}  
 
     def setup_boxes(self):
         for player in self.players:
-            self.boxes[player] = [0, 0, 1, 1, 0]  # Initialize boxes for each player
-            random.shuffle(self.boxes[player])  # Shuffle each player's boxes
+            self.boxes[player] = [0, 0, 1, 1, 0]  
+            random.shuffle(self.boxes[player])  
 
     def reveal_box(self, player, box_index):
         if self.boxes[player][box_index] == 1:
@@ -39,7 +39,7 @@ class Game:
                 self.round_winner = self.players[self.current_player]
                 break
 
-            self.current_player = 1 - self.current_player  # Switch players
+            self.current_player = 1 - self.current_player  
 
         return gold_count
 
