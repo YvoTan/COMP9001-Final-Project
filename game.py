@@ -3,7 +3,7 @@ import random
 class Game:
     def __init__(self):
         self.players = ['Player 1', 'Player 2']
-        self.scores = [0, 0]  # Record win counts
+        self.scores = [0, 0]  
         self.round_winner = None
         self.current_player = 0
         self.boxes = {player: [] for player in self.players}  
@@ -66,6 +66,5 @@ class Game:
             if input('Continue to the next round? (y/n): ') != 'y':
                 break
 
-# Start the game
 game = Game()
 game.start_game()
