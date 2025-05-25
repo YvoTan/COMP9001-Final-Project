@@ -7,7 +7,7 @@ class Game:
         self.round_winner = None
         self.current_player = 0
         self.boxes = {player: [] for player in self.players}
-        self.hammers = {player: False for player in self.players}  # Track if players have a Hammer
+        self.hammers = {player: False for player in self.players}  # check Hammer
 
     def setup_boxes(self):
         for player in self.players:
@@ -31,7 +31,7 @@ class Game:
         if action.lower() == 'y':
             target_player = 1 - self.current_player
             box_index = int(input(f'Choose a box to destroy (1-5) from {self.players[target_player]}: ')) - 1
-            self.boxes[self.players[target_player]][box_index] = -1  # Mark box as destroyed
+            self.boxes[self.players[target_player]][box_index] = -1  # box destroyed
             print(f'Box {box_index + 1} of {self.players[target_player]} has been destroyed!')
             return True
         return False
@@ -39,9 +39,6 @@ class Game:
     def play_round(self):
         self.setup_boxes()
         gold_count = [0, 0]
-
-        # Randomly assign Hammer to one player each round
-        self.hammers[self.players[random.randint(0, 1)]] = True
 
         while max(gold_count) < 2:
             print(f"\nIt's {self.players[self.current_player]}'s turn.")
@@ -66,10 +63,11 @@ class Game:
 
     def next_round(self):
         if self.round_winner:
+            self.hammers[self.round_winner] = True
             loser = self.players[1 - self.current_player]
             print(f'{loser} starts the next round.')
             self.current_player = 1 - self.current_player
-            self.round_winner = None
+            self.round_winner = None  # hammer to the winner according to previous round
 
     def check_winner(self):
         for i, score in enumerate(self.scores):
